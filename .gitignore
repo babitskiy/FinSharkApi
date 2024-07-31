@@ -258,3 +258,6 @@ paket-files/
 Отчет20190524-1304.diagsession
 _source/distr/uaexpert-bin-win32-x86-vs2008sp1-v1.5.1-331/CHANGELOG.txt
 _source/distr/
+
+# Vscode project files
+.vscode
