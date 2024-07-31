@@ -261,3 +261,5 @@ _source/distr/
 
 # Vscode project files
 .vscode
+
+**/appsettings.json
