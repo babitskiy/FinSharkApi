@@ -23,12 +23,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseMiddlewareOne();
-app.UseMiddlewareTwo();
-app.UseMiddlewareThree();
-
 app.UseHttpsRedirection();
 
 app.MapControllers();
+
+//app.UseSandboxMiddleware();
 
 app.Run();
