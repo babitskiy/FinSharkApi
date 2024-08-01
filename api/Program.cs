@@ -1,4 +1,5 @@
 using api.Data;
+using api.Middlewares;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddlewareOne();
+app.UseMiddlewareTwo();
+app.UseMiddlewareThree();
 
 app.UseHttpsRedirection();
 
