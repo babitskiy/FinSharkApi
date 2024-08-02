@@ -9,12 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors();
 
 builder.Services.AddDbContext<ApplicationDBContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 var app = builder.Build();
+
+app.UseCors(builder => builder.WithOrigins("http://localhost:5275"));
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
