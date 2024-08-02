@@ -1,0 +1,12 @@
+// vscode extensions for c#
+// - c#
+// - c# dev kit
+// - .net extensions pack 
+// - .net install tool
+// - nuget gallery
+// - prettier 
+// - extensions pack by JosKreativ
+
+dotnet ef migrations add init // инициация новой миграции
+dotnet ef database update // обновление БД
+dotnet watch run // запуск приложения
