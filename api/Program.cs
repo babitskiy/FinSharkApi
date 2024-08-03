@@ -13,6 +13,7 @@ builder.Services.AddCors();
 
 builder.Services.AddDbContext<ApplicationDBContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.EnableSensitiveDataLogging(true);
 });
 
 var app = builder.Build();
