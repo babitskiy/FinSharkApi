@@ -1,4 +1,5 @@
 using api.Data;
+using api.Dtos.Stock;
 using api.Interfaces;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,50 @@ namespace api.Repositories
         public StockRepository(ApplicationDBContext context)
             => _context = context;
 
-        public Task<List<Stock>> GetAllAsync()
-            => _context.Stocks.ToListAsync();
+        public async Task<Stock> CreateAsync(Stock stockModel)
+        {
+            await _context.Stocks.AddAsync(stockModel);
+            await _context.SaveChangesAsync();
+            return stockModel;
+        }
+
+        public async Task<Stock?> DeleteAsync(int id)
+        {
+            var stockModel = await _context.Stocks.FirstOrDefaultAsync(s => s.Id == id);
+            
+            if (stockModel is null)
+                return null;
+
+            _context.Remove(stockModel);
+
+            await _context.SaveChangesAsync();
+
+            return stockModel;
+        }
+
+        public async Task<List<Stock>> GetAllAsync()
+            => await _context.Stocks.ToListAsync();
+
+        public async Task<Stock?> GetByIdAsync(int id)
+            => await _context.Stocks.FindAsync(id);
+
+        public async Task<Stock?> UpdateAsync(int id, UpdateStockRequestDto request)
+        {
+            var existingStock = await _context.Stocks.FirstOrDefaultAsync(s => s.Id == id);
+
+            if (existingStock is null)
+                return null;
+
+            existingStock.Symbol = request.Symbol;
+            existingStock.CompanyName = request.CompanyName;
+            existingStock.Purchase = request.Purchase;
+            existingStock.LastDiv = request.LastDiv;
+            existingStock.Industry = request.Industry;
+            existingStock.MarketCap = request.MarketCap;
+
+            await _context.SaveChangesAsync();
+
+            return existingStock;
+        }
     }
 }
